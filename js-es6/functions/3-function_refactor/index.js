@@ -21,8 +21,14 @@ fetchData()
     throw error;
   });
 
-export const asyncFetchData = () => {
+export const asyncFetchData = async () => {
   // tu codigo aqui
+  try {
+    const data = await fetchData();
+    return data;
+  } catch (error) {
+    throw error;
+  }
 };
 
 // 2)
@@ -40,8 +46,15 @@ getUser(1)
     throw error;
   });
 
-export const asyncGetUser = () => {
+export const asyncGetUser = async (userId) => {
   // tu codigo aqui
+  try {
+    const user = await getUser(userId)
+    const data = JSON.parse(user)
+    return data
+  } catch (error) {
+    throw error
+  }
 };
 
 // 3) si las credenciales son incorrectas levantara un error
@@ -59,8 +72,15 @@ login("admin", "1234")
     throw error;
   });
 
-export const asyncLogin = () => {
+export const asyncLogin = async (username, password) => {
   // tu codigo aqui
+  try {
+    const message = await login(username, password)
+    const userInfo = await getUserInfo()
+    return JSON.parse(userInfo)
+  } catch (error) {
+    throw error
+  }
 };
 
 // 4) manejo de errores
@@ -75,8 +95,14 @@ getData()
     throw error;
   });
 
-export const asyncGetData = () => {
+export const asyncGetData = async () => {
   // tu ccodigo aqui
+  try {
+    const data = await getData();
+    return { data };
+  } catch (error) {
+    throw error;
+  }
 };
 
 // 5)
@@ -95,12 +121,24 @@ fetchData1()
     throw error;
   });
 
-export const asyncFetchData1 = () => {
+export const asyncFetchData1 = async () => {
   //tu codigo aqui
+  try {
+    const data1 = await fetchData1();
+    return data1;
+  } catch (error) {
+    throw error;
+  }
 };
 
 // crear una funcion para realizar fetch utilizando async await, debe recibir un string(url) retornar la respuesta o el error
 
-const fetcherFn = (url) => {
+const fetcherFn = async (url) => {
   //tu codigo aqui
+  try {
+    const response = await fetch(url)
+    const data = await response.json()
+  } catch (error) {
+    throw error
+  }
 };
