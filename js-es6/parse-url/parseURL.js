@@ -1,5 +1,8 @@
 function parseURL(urlString) {
   // Tu codigo acá
+  return urlString
+    .slice(1)
+    .split('/')
 }
 
 const segmentsArray = parseURL(`/en-US/docs/Web/API/URL/pathname`);
