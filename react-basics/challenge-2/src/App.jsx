@@ -1,39 +1,58 @@
-import Footer from './components/Footer';
-import Header from './components/Header';
-import Quote from './components/Quote';
-import Form from './components/Form';
-import data from './data.json';
-import './App.css';
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import Quote from "./components/Quote";
+import Form from "./components/Form";
+import QuoteCard from "./components/QuoteCard";
+import data from "./data.json";
+import "./App.css";
 
-import { useState } from 'react';
+import { useState } from "react";
+import { useEffect } from "react";
 
 function App() {
-    const [quote, setQuote] = useState(data[0]);
-    const [quotes, setQuotes] = useState([]);
+  const [quote, setQuote] = useState({});
+  const [quotes, setQuotes] = useState([]);
 
-    const setRandomQuote = () => {
-        const randomNumber = Math.floor(Math.random() * data.length);
-        setQuote(data[randomNumber]);
-    };
+  useEffect(() => {
+    fetch("http://localhost:3000/quotes")
+      .then((response) => response.json())
+      .then((data) => setQuotes(data));
+  }, [])
 
-    const handleAdd = (quote) => {
-        setQuotes([...quotes, quote]);
-    }
+  const setRandomQuote = () => {
+    const randomNumber = Math.floor(Math.random() * data.length);
+    setQuote(data[randomNumber]);
+  };
 
-    return (
-        <>
-            <Header />
-            {console.log(quotes)}
-            <main>
-                <Form handleAdd={handleAdd} />
-                <Quote quote={quote.quote} author={quote.author} />
+  const handleAdd = (quote) => {
+    setQuotes([...quotes, quote]);
+  };
 
-                <button onClick={setRandomQuote}>Change quote</button>
-            </main>
+  return (
+    <>
+      {console.log(quotes)}
+      <Header />
+      <main>
+        <Form handleAdd={handleAdd} />
+        <Quote quote={quote.quote} author={quote.author} />
 
-            <Footer text="My quotes app!" />
-        </>
-    );
+        <button onClick={setRandomQuote}>Change quote</button>
+
+        <div>
+          {quotes.map((quote) => (
+            <QuoteCard
+              key={quote.id}
+              id={quote.id}
+              quote={quote.quote}
+              author={quote.author}
+            />
+          ))}
+        </div>
+      </main>
+
+      <Footer text="My quotes app!" />
+    </>
+  );
 }
 
 export default App;
