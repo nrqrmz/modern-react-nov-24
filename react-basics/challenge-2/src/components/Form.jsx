@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Proptypes from 'prop-types';
 
-export default function Form() {
+export default function Form({ handleAdd }) {
   const [formData, setFormData] = useState({});
 
   const handleSubmit = (event) => {
@@ -11,6 +11,8 @@ export default function Form() {
       alert('Completa los campos faltantes')
       return
     }
+
+    handleAdd(formData)
 
     setFormData({
       quote: '',
@@ -58,4 +60,8 @@ export default function Form() {
       </form>
     </>
   );
+}
+
+Form.propTypes = {
+  handleAdd: Proptypes.func.isRequired
 }

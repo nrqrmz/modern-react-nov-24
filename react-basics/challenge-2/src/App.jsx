@@ -9,18 +9,23 @@ import { useState } from 'react';
 
 function App() {
     const [quote, setQuote] = useState(data[0]);
+    const [quotes, setQuotes] = useState([]);
 
     const setRandomQuote = () => {
         const randomNumber = Math.floor(Math.random() * data.length);
         setQuote(data[randomNumber]);
     };
 
+    const handleAdd = (quote) => {
+        setQuotes([...quotes, quote]);
+    }
+
     return (
         <>
             <Header />
-
+            {console.log(quotes)}
             <main>
-                <Form />
+                <Form handleAdd={handleAdd} />
                 <Quote quote={quote.quote} author={quote.author} />
 
                 <button onClick={setRandomQuote}>Change quote</button>
