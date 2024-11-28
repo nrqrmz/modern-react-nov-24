@@ -1,10 +1,10 @@
 import Footer from './components/Footer';
 import Header from './components/Header';
-
+import Quote from './components/Quote';
+import Form from './components/Form';
+import data from './data.json';
 import './App.css';
 
-import data from './data.json';
-import Quote from './components/Quote';
 import { useState } from 'react';
 
 function App() {
@@ -20,12 +20,13 @@ function App() {
             <Header />
 
             <main>
+                <Form />
                 <Quote quote={quote.quote} author={quote.author} />
 
-                <button onClick={setRandomQuote}>Cambiar quote</button>
+                <button onClick={setRandomQuote}>Change quote</button>
             </main>
 
-            <Footer text="Mi App de quotes!" />
+            <Footer text="My quotes app!" />
         </>
     );
 }
