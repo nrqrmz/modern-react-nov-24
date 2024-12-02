@@ -38,7 +38,7 @@ function App() {
 
         <button onClick={setRandomQuote}>Change quote</button>
 
-        <div>
+        <div className="grid-quotes">
           {quotes.map((quote) => (
             <QuoteCard
               key={quote.id}
